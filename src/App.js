@@ -1,7 +1,9 @@
-import "./App.css";
-import { useState, setSelected } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 
-const ACTIVE_CLASS_NAME = 'toggle-container__item--active'
+import "./App.css";
+
+const ACTIVE_CLASS_NAME = "toggle-container__item--active";
 
 const ToggleButton = (props) => {
   const { selected, setSelected } = props;
@@ -43,5 +45,10 @@ function App() {
     </div>
   );
 }
+
+ToggleButton.propTypes = {
+  selected: PropTypes.bool,
+  setSelected: PropTypes.func,
+};
 
 export default App;
