@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState, setSelected } from "react";
+
+const ACTIVE_CLASS_NAME = 'toggle-container__item--active'
+
+const ToggleButton = (props) => {
+  const { selected, setSelected } = props;
+
+  const toggleSelected = (evt) => {
+    const classNames = evt.target.className.split(" ");
+    if (!classNames.includes(ACTIVE_CLASS_NAME)) setSelected(!selected);
+  };
+
+  return (
+    <div className="toggle-container" onClick={toggleSelected}>
+      <div
+        className={`toggle-container__item toggle-container__item--first ${
+          selected ? "toggle-container__item--active" : ""
+        } `}
+      >
+        YES
+      </div>
+      <div
+        className={`toggle-container__item toggle-container__item--second ${
+          selected ? "" : "toggle-container__item--active"
+        }`}
+      >
+        NO
+      </div>
+    </div>
+  );
+};
 
 function App() {
+  const [selected, setSelected] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ToggleButton
+        selected={selected}
+        setSelected={() => setSelected(!selected)}
+      />
     </div>
   );
 }
